@@ -9,7 +9,7 @@ const Hit = ({ hit }) => {
         <div class="font-bold text-xl mb-2">
           <Highlight attribute="name" hit={hit} />
         </div>
-        <p class="text-white text-base">
+        <p class="dark:text-white text-gray-500 text-base">
           <Highlight attribute="overview" hit={hit} />
         </p>
       </div>
