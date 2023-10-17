@@ -1,8 +1,10 @@
 import Image from "next/image";
 import algoliasearch from "algoliasearch/lite";
 import { useEffect, useState } from "react";
-import { InstantSearch, SearchBox, PoweredBy, Hits } from "react-instantsearch";
+import { InstantSearch, SearchBox, PoweredBy } from "react-instantsearch";
 import Hit from "@src/components/Hit";
+import TableHit from "@src/components/TableHit";
+import Table from "@src/components/Table";
 
 export default function Home() {
   const searchClient = algoliasearch(
@@ -12,22 +14,13 @@ export default function Home() {
 
   const [movies, setMovies] = useState([]);
 
-  const fetchData = async () => {
-    const response = await fetch('/api/get-data');
-    const data = await response.json();
-    setMovies(data);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div>
       <div className="mb-6 w-2/4 m-auto">
         <InstantSearch
             searchClient={searchClient}
-            indexName='movies'
+            indexName='admin'
         >
            <div className='container-search-hits'>
               <SearchBox classNames={{
@@ -36,7 +29,7 @@ export default function Home() {
                 submitIcon: "right-2 top-2.5 w-4 h-4 text-gray-400 absolute pointer-events-none dark:text-gray-300",
               }} placeholder='Search for movies' />
               <PoweredBy className="w-2/5 my-2" />
-              <Hits hitComponent={Hit} />
+              <Table />
             </div>
         </InstantSearch>
       </div>
